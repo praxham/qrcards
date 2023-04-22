@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+        margin: 30px;
+        -webkit-tap-highlight-color: transparent;
+        background-color: white;
+        font-family: 'Noto Sans Devanagari', sans-serif;
+        font-size: 24px;
+        font-weight: 600; 
+        }
+        input[type="text"],#ctype,#createcard {
+            -webkit-appearance: none;
+            appearance: none;
+            text-decoration: none;
+            border-color: 1px solid black;
+            width: 100%;
+            height: 56px;
+            border-radius: 25px;
+            border: 0;
+            border: 1.6px solid black;
+            font-size:24px;
+            color: #972253;
+            padding-left: 8px;
+            padding-right: 8px;
+            font-weight: 600;
+            height: 54px;
+            width: 100%;
+        }
+        .stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        #createcard {
+            position: absolute;
+            bottom: 30px;
+            border: 0;
+            font-weight: 600;
+            width: 349.6px;
+            color: #972253;
+            background: radial-gradient(119.64% 119.64% at 50% 50%, #FF7BB2 0%, #FFE3EF 100%);
+        }
+    </style>
+</head>
+<body>
+    <form class="stack" action=""history.back()"" onsubmit="myfunc(event);">
+            <input placeholder="Choose Card Type" list="cards" id="ctype" required/></label>
+            <datalist id="cards">
+              <option value="Aadhaar Card">
+              <option value="Pan Card">
+              <option value="Election Card">
+              <option value="UPI 1">
+              <option value="UPI 2">
+              <option value="Other">
+            </datalist>
+        <input type="text" id="cnum" name="fname" placeholder="Enter Card Number" required>
+        <input type="text" id="pdflnk" name="lname" placeholder="Add Link" required>
+        <input type="text" id="qrdt" name="lname" placeholder="Add QR Code Data" required>
+        <input type="submit" id="createcard" value="Create Card">
+    </form>
+</body>
+<script>
+    console.log("page is fully loaded");
+    function myfunc(event) {
+        console.log("script loaded");
+        console.log("hiii")
+        event.preventDefault();
+        var ctype = document.getElementById("ctype").value;
+        var cnum = document.getElementById("cnum").value;
+        var pdflnk = document.getElementById("pdflnk").value;
+        var qrdt = document.getElementById("qrdt").value;
+        console.log(ctype)
+        
+        if (ctype == "Aadhaar Card"){
+            localStorage.setItem("acardnumber",cnum);
+            localStorage.setItem("apdflink",pdflnk);
+            localStorage.setItem("aqrdata",qrdt);
+        }else{
+            console.log("Aadhaar not available")
+        }
+        if (ctype === "Pan Card"){
+            localStorage.setItem("pcardnumber",cnum);
+            localStorage.setItem("ppdflink",pdflnk);
+            localStorage.setItem("pqrdata",qrdt);
+        }
+        if (ctype === "Election Card"){
+            localStorage.setItem("ecardnumber",cnum);
+            localStorage.setItem("epdflink",pdflnk);
+            localStorage.setItem("eqrdata",qrdt);
+        }
+        if (ctype === "UPI 1"){
+            localStorage.setItem("u1cardnumber",cnum);
+            localStorage.setItem("u1pdflink",pdflnk);
+            localStorage.setItem("u1qrdata",qrdt);
+        }
+        if (ctype === "UPI 2"){
+            localStorage.setItem("u2cardnumber",cnum);
+            localStorage.setItem("u2pdflink",pdflnk);
+            localStorage.setItem("u2qrdata",qrdt);
+        }
+        if (ctype === "Other"){
+            localStorage.setItem("ocardnumber",cnum);
+            localStorage.setItem("opdflink",pdflnk);
+            localStorage.setItem("oqrdata",qrdt);
+        }
+        window.history.back();
+    }  
+    // function backtohome() {
+    //     window.open("index.html", "_blank")
+    // }
+    // function copytxt() {
+    //     navigator.clipboard.writeText(card_num);
+    //     console.log("text copied");
+    // }
+
+</script>
+</html>
