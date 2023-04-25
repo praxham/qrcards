@@ -581,6 +581,11 @@ window.onload = (event) => {
     } else {
         $('.UPI2Card').show();
     }
+    if ($('#OID1').is(':empty')){
+        $('.OtherCard1').hide();
+    } else {
+        $('.OtherCard1').show();
+    }
     const dragarea = document.querySelector(".stack");
     new Sortable(dragarea,{
         handle:'.handle',
