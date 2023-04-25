@@ -142,7 +142,7 @@
               <option value="Election Card">
               <option value="UPI 1">
               <option value="UPI 2">
-              <option id="other" value="Other">
+              <!-- <option id="other" value="Other"> -->
             </datalist>
         <input type="text" id="cnum" name="fname" placeholder="Enter Card Number" required>
         <input type="text" id="pdflnk" name="lname" placeholder="Add Link" required>
@@ -192,12 +192,12 @@
             localStorage.setItem("u2pdflink",pdflnk);
             localStorage.setItem("u2qrdata",qrdt);
         }
-        if (ctype === "Other"){
-            localStorage.setItem("ocardnumber",cnum);
-            localStorage.setItem("opdflink",pdflnk);
-            localStorage.setItem("oqrdata",qrdt);
-            localStorage.setItem("ocolor",ccol);
-        }
+        // if (ctype === "Other"){
+        //     localStorage.setItem("ocardnumber",cnum);
+        //     localStorage.setItem("opdflink",pdflnk);
+        //     localStorage.setItem("oqrdata",qrdt);
+        //     localStorage.setItem("ocolor",ccol);
+        // }
         
         window.history.back();
     }
@@ -205,22 +205,22 @@
         console.log('started')
         $('#createcard').css('position',"relative");
     })
-    function OtherCard (nth) {
-        $('<div/>',{ class : 'Other'}).appendTo(".stack");
-        $('<div/>',{ class : 'upperregion'}).appendTo(".Other");
-        $('<p/>',{ id : 'OID'}).appendTo("upperregion");
-        $('<img/>',{ id : 'copy' + nth}).appendTo("p");
-    }
-    let other;
-     setInterval(function () {
-             other = $('#ctype').val()
-             if (other === "Other") {
-                 $('#color').show()
-                 $('#createcard').css('position',"relative");
-                 $('#createcard').css('margin-top',"24px");
-                console.log("other clicked") 
-            }  
-    }, 1000);
+    // function OtherCard (nth) {
+    //     $('<div/>',{ class : 'Other'}).appendTo(".stack");
+    //     $('<div/>',{ class : 'upperregion'}).appendTo(".Other");
+    //     $('<p/>',{ id : 'OID'}).appendTo("upperregion");
+    //     $('<img/>',{ id : 'copy' + nth}).appendTo("p");
+    // }
+    // let other;
+    //  setInterval(function () {
+    //          other = $('#ctype').val()
+    //          if (other === "Other") {
+    //              $('#color').show()
+    //              $('#createcard').css('position',"relative");
+    //              $('#createcard').css('margin-top',"24px");
+    //             console.log("other clicked") 
+    //         }  
+    // }, 1000);
     function jQ_append(id_of_input, text){
     var input_id = '#'+id_of_input;
     $(input_id).val($(input_id).val() + text);
