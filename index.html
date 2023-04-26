@@ -267,6 +267,25 @@
     #OID1 {
         width: auto;
     }
+    .background1 img {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 50px;
+        width: 50px;
+        display: none;
+    }
+    #empty {
+        font-size: 24px;
+        font-weight: 600;
+        text-decoration-line: underline;
+        color: rgb(129, 129, 129);
+        position: fixed;
+        top: 50vh;
+        left: 50vw;
+        transform: translate(-50%,-50%);
+        display: none;
+    }
     </style>
 </head>
 <body>
@@ -357,7 +376,8 @@
     </div>
     </div>
     <a class="horcen" href="add.html"><div class="addbuttton"><img class="add" src="add-symbol-svgrepo-com.svg" alt=""></div></a>
-    <div class="background1"></div>
+    <a href="add.html"><p id="empty">Add Cards</p></a>
+    <div class="background1"><img id="deletecard" src="deleteicon.svg"></div>
     <div id="whitebg"></div>
     <!-- <div class="popup"><img Class="Card" src="Aadhaar Card.png"></div> -->
 </body>
@@ -406,7 +426,16 @@ window.onload = (event) => {
         $('.AadhaarCard').css('top', '50%');
         $('.AadhaarCard').css('transform', 'translateY(-50%)');
         $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden')
+        $('body').css('overflow-y','hidden');
+        $('#deletecard').show()
+        $('#deletecard').click(function(){
+            console.log('delete clicked')
+            localStorage.removeItem("acardnumber");
+            localStorage.removeItem("apdflink");
+            localStorage.removeItem("aqrdata");
+            window.history.back();
+            location.reload();
+        })
         $(document).on('click','.background1',()=>{
             $('.background1').css('z-index', '-50');
             $('.AadhaarCard').css('position', "");
@@ -434,7 +463,15 @@ window.onload = (event) => {
         $('.PanCard').css('top', '50%');
         $('.PanCard').css('transform', 'translateY(-50%)');
         $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden')
+        $('body').css('overflow-y','hidden');
+        $('#deletecard').show()
+        $('#deletecard').click(function(){
+            localStorage.removeItem("pcardnumber");
+            localStorage.removeItem("ppdflink");
+            localStorage.removeItem("pqrdata");
+            window.history.back();
+            location.reload();
+        })
         $('.background1').click(function(){
             $('.background1').css('z-index', '-50');
             $('.PanCard').css('position', "");
@@ -462,7 +499,15 @@ window.onload = (event) => {
         $('.ElectionCard').css('top', '50%');
         $('.ElectionCard').css('transform', 'translateY(-50%)');
         $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden')
+        $('body').css('overflow-y','hidden');
+        $('#deletecard').show()
+        $('#deletecard').click(function(){
+            localStorage.removeItem("ecardnumber");
+            localStorage.removeItem("epdflink");
+            localStorage.removeItem("eqrdata");
+            window.history.back();
+            location.reload();
+        })
         $('.background1').click(function(){
             $('.background1').css('z-index', '-50');
             $('.ElectionCard').css('position', "");
@@ -490,7 +535,15 @@ window.onload = (event) => {
         $('.UPI1Card').css('top', '50%');
         $('.UPI1Card').css('transform', 'translateY(-50%)');
         $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden')
+        $('body').css('overflow-y','hidden');
+        $('#deletecard').show()
+        $('#deletecard').click(function(){
+            localStorage.removeItem("u1cardnumber");
+            localStorage.removeItem("u1pdflink");
+            localStorage.removeItem("u1qrdata");
+            window.history.back();
+            location.reload();
+        })
         $('.background1').click(function(){
             $('.background1').css('z-index', '-50');
             $('.UPI1Card').css('position', "");
@@ -512,41 +565,21 @@ window.onload = (event) => {
         document.execCommand('copy');
         alert('text copied')
     });
-    $('.OtherCard1').click(function(){
-        $('.OtherCard1').css('z-index', '1000');
-        $('.OtherCard1').css('position', 'absolute');
-        $('.OtherCard1').css('top', '50%');
-        $('.OtherCard1').css('transform', 'translateY(-50%)');
-        $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden')
-        $('.background1').click(function(){
-            $('.background1').css('z-index', '-50');
-            $('.OtherCard1').css('position', "");
-            $('.OtherCard1').css('top', "");
-            $('.OtherCard1').css('transform', "");
-            $('.OtherCard1').css('z-index', "");
-            $('body').css('overflow-y',"")
-        });
-    });
-    document.getElementById("OID1").innerHTML = o1card_num;
-    imgBox = document.getElementById("imgBox6");
-    qrimg = document.getElementById("qrimg6");
-    qrimg.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + o1qr_dt + "&size=800x800";
-    $('#lnk6').click(function(){
-        window.open(o1pdf_lnk);
-    });
-    $(".OtherCard1").css('background-color',o1col)
-    $('#copy6').click(function(){
-        var dummy = $('<input>').val(o1card_num).appendTo('body').select();
-        document.execCommand('copy');
-        alert('text copied')
-    });
     $('.UPI2Card').click(function(){
         $('.UPI2Card').css('z-index', '1000');
         $('.UPI2Card').css('position', 'absolute');
         $('.UPI2Card').css('top', '50%');
         $('.UPI2Card').css('transform', 'translateY(-50%)');
         $('.background1').css('z-index', '8');
+        $('body').css('overflow-y','hidden');
+        $('#deletecard').show()
+        $('#deletecard').click(function(){
+            localStorage.removeItem("u2cardnumber");
+            localStorage.removeItem("u2pdflink");
+            localStorage.removeItem("u2qrdata");
+            window.history.back();
+            location.reload();
+        })
         $('.background1').click(function(){
             $('.background1').css('z-index', '-50');
             $('.UPI2Card').css('position', "");
@@ -556,6 +589,17 @@ window.onload = (event) => {
             $('body').css('overflow-y',"")
         });
     });
+    // document.getElementById("OID1").innerHTML = o1card_num;
+    // imgBox = document.getElementById("imgBox6");
+    // qrimg = document.getElementById("qrimg6");
+    // qrimg.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + o1qr_dt + "&size=800x800";
+    // $('#lnk6').click(function(){
+    //     window.open(o1pdf_lnk);
+    // });
+    if ($('#UID').is(':empty') && $('#PID').is(':empty') && $('#EPIC').is(':empty') && $('#UPIID1').is(':empty') && $('#UPIID2').is(':empty')){
+        $('#empty').show()
+        $('#whitebg').hide();
+    }
     if ($('#UID').is(':empty')){
         $('.AadhaarCard').hide();
     } else {
