@@ -1,681 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang=en>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Cards</title>
-    <link rel="icon" type="image/x-icon" href="qrcardslogo.png">
-    <link rel="manifest" href="manifest.json" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-    <script src="html2canvas.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.js"></script>
-    <style>
-    .hide {
-        display: none;
-    }
-    h1 {
-        margin: none;
-        padding: none;
-    }
-    body {
-        margin: 30px;
-        -webkit-tap-highlight-color: transparent;
-        background-color: white;
-        font-family: 'Noto Sans Devanagari', sans-serif;
-    }
-    .stack {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .Card {
-        width: auto;
-        height: 220px;
-        margin-bottom: -150px;
-    }
-    .popup {
-        position: absolute;
-        margin-top: 50%;
-        margin-left: 50%;
-    }
-    .horcen {
-       display: flex;
-       justify-content: center;
-    }
-    .addbuttton {
-        position: fixed;
-        top: 15px;
-        right: 30px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        background-color: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(5px);
-        display: flex; 
-        justify-content: center; 
-        align-items: center;
-        height: 60px;
-        width: auto;
-        border-radius: 50px;
-        border-style: dashed;
-    }
-    .add {
-        height: 36px;
-        width: 36px;
-        padding: 11px;
-    }
-    a:link {
-        color: black;
-        background-color: transparent;
-        text-decoration: none;
-    }
-
-    a:visited {
-        color: black;
-        background-color: transparent;
-        text-decoration: none;
-    }
-    .AadhaarCard {
-        margin-bottom: -250px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center; 
-        background: rgb(255,40,58);
-        background: radial-gradient(circle, rgba(255,40,58,1) 0%, rgba(255,188,194,1) 100%);
-        height: auto;
-        width: 330px;
-        max-width: 330px;
-        border-radius: 25px;
-        -webkit-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        -moz-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-    }
-    .PanCard { 
-        margin-bottom: -250px;
-        height: auto;
-        width: 330px;
-        max-width: 330px;
-        border-radius: 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: rgb(46,117,255);
-        background: radial-gradient(circle, rgba(46,117,255,1) 0%, rgba(199,218,255,1) 100%);
-        -webkit-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        -moz-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-    }
-    .ElectionCard {
-        margin-bottom: -250px;
-        height: auto;
-        width: 330px;
-        max-width: 330px;
-        border-radius: 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: rgb(255,46,171);
-        background: radial-gradient(circle, rgba(255,46,171,1) 0%, rgba(255,195,231,1) 100%);
-        -webkit-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        -moz-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-    }
-    .UPI1Card {
-        margin-bottom: -250px;
-        height: auto;
-        width: 330px;
-        max-width: 330px;
-        border-radius: 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: conic-gradient(from 180deg at 50% 50%, #BBFFA9 0deg, #FF7A00 91.12deg, #FFFFFF 188.62deg, #79FF57 265.5deg, #BBFFA9 360deg);
-        -webkit-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        -moz-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-    }
-    .UPI2Card {
-        margin-bottom: -250px;
-        height: auto;
-        width: 330px;
-        max-width: 330px;
-        border-radius: 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: conic-gradient(from 180deg at 50% 50%, #BBFFA9 0deg, #FF7A00 91.12deg, #FFFFFF 188.62deg, #79FF57 265.5deg, #BBFFA9 360deg);
-        -webkit-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        -moz-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-    }
-    .OtherCard1 {
-        margin-bottom: -250px;
-        height: auto;
-        width: 330px;
-        max-width: 330px;
-        border-radius: 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        
-        -webkit-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        -moz-box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-        box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.25);
-    }
-    .Aadhaar,.PAN,.Election,.UPIlogo,.handle {
-        padding-top: 8px;
-        height: 50px;
-    }
-    .UPIlogo {
-        padding-top: 8px;
-        height: 36px;
-    }
-    #UID, #PID, #EPIC, #UPIID1, #UPIID2, #OID1 {
-        align-self: self-start;
-        font-size: 24px;
-        font-weight: 600;
-    }
-    .upperregion {
-        height: 220px;
-        width: 314px;
-        display: flex;
-        align-content: center;
-        justify-content: space-between;
-        padding-right: 16px;
-        padding-left: 16px;
-    }
-    #copy, #copy2, #copy3, #copy4, #copy5, #copy6{
-        align-self: self-start;
-        padding-left: 8px;
-        padding-top: 24px;
-        height: 24px;
-        width: 24px;
-    } 
-    #lnk, #lnk2, #lnk3, #lnk4, #lnk5, #lnk6 {
-        align-self: self-start;
-        padding-left: 8px;
-        padding-top: 24px;
-        height: 24px;
-        width: 24px;
-    }
-    .UID, .PID, .EPIC, .UPIID1, .UPIID2, .OTHER {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-    input {
-        opacity: 0;
-        pointer-events: none;
-    }
-    #qrimg, #qrimg2, #qrimg3, #qrimg4, #qrimg5, #qrimg6 {
-        margin-top: -150px;
-        width: 300px;
-        padding-bottom: 12px;
-    }
-    #Aadhaarpopup > img {
-        width: 400px;
-        height: 400px;
-    }
-    .background1 {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(10px);
-        width: 100vw;
-        height: 100vh;
-        z-index: -5;
-    }
-    #whitebg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: white;
-        width: 100vw;
-        height: 100vh;
-        z-index: 1000;
-    }
-    .UPI1, .UPI2, .OtherID {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-    #UPIID1, #UPIID2, #OID1 {
-        width: 130px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    #upilogo .handle{
-        width: 100px;
-        padding-top: 16px;
-    }
-    .handle {
-        cursor: move; /* fallback if grab cursor is unsupported */
-        cursor: grab;
-    }
-    #OID1 {
-        width: auto;
-    }
-    .background1 img {
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 50px;
-        width: 50px;
-        display: none;
-    }
-    #empty {
-        font-size: 24px;
-        font-weight: 600;
-        text-decoration-line: underline;
-        color: rgb(129, 129, 129);
-        position: fixed;
-        top: 50vh;
-        left: 50vw;
-        transform: translate(-50%,-50%);
-        display: none;
-    }
-    </style>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta charset=UTF-8>
+<meta http-equiv=X-UA-Compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>QR Cards</title>
+<link rel=icon type=image/x-icon href=qrcardslogo.png>
+<link rel=manifest href=manifest.json>
+<link rel=preconnect href=https://fonts.googleapis.com>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel=stylesheet>
+<script src=jqueryproduction.js crossorigin=anonymous></script>
+<script src=Sortable.js></script>
+<style>.hide{display:none}h1{margin:none;padding:none}body{margin:30px;-webkit-tap-highlight-color:transparent;background-color:#fff;font-family:'Noto Sans Devanagari',sans-serif;}.stack{display:flex;flex-direction:column;align-items:center}.Card{width:auto;height:220px;margin-bottom:-150px}.popup{position:absolute;margin-top:50%;margin-left:50%}.horcen{display:flex;justify-content:center}.addbuttton{position:fixed;top:15px;right:30px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;background-color:rgba(255,255,255,.5);backdrop-filter:blur(5px);display:flex;justify-content:center;align-items:center;height:60px;width:auto;border-radius:50px;border-style:dashed}.add{height:36px;width:36px;padding:11px}a:link{color:#000;background-color:transparent;text-decoration:none}a:visited{color:#000;background-color:transparent;text-decoration:none}.AadhaarCard{margin-bottom:-250px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#ff283a;background:radial-gradient(circle,#ff283a 0,#ffbcc2 100%);height:auto;width:330px;max-width:330px;border-radius:25px;-webkit-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);-moz-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);box-shadow:0 -10px 20px 0 rgba(0,0,0,.25)}.PanCard{margin-bottom:-250px;height:auto;width:330px;max-width:330px;border-radius:25px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#2e75ff;background:radial-gradient(circle,#2e75ff 0,#c7daff 100%);-webkit-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);-moz-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);box-shadow:0 -10px 20px 0 rgba(0,0,0,.25)}.ElectionCard{margin-bottom:-250px;height:auto;width:330px;max-width:330px;border-radius:25px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#ff2eab;background:radial-gradient(circle,#ff2eab 0,#ffc3e7 100%);-webkit-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);-moz-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);box-shadow:0 -10px 20px 0 rgba(0,0,0,.25)}.UPI1Card{margin-bottom:-250px;height:auto;width:330px;max-width:330px;border-radius:25px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:conic-gradient(from 180deg at 50% 50%,#bbffa9 0deg,#ff7a00 91.12deg,#fff 188.62deg,#79ff57 265.5deg,#bbffa9 360deg);-webkit-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);-moz-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);box-shadow:0 -10px 20px 0 rgba(0,0,0,.25)}.UPI2Card{margin-bottom:-250px;height:auto;width:330px;max-width:330px;border-radius:25px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:conic-gradient(from 180deg at 50% 50%,#bbffa9 0deg,#ff7a00 91.12deg,#fff 188.62deg,#79ff57 265.5deg,#bbffa9 360deg);-webkit-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);-moz-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);box-shadow:0 -10px 20px 0 rgba(0,0,0,.25)}.OtherCard1{margin-bottom:-250px;height:auto;width:330px;max-width:330px;border-radius:25px;display:flex;flex-direction:column;align-items:center;justify-content:center;-webkit-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);-moz-box-shadow:0 -10px 20px 0 rgba(0,0,0,.25);box-shadow:0 -10px 20px 0 rgba(0,0,0,.25)}.Aadhaar,.Election,.PAN,.UPIlogo,.handle{padding-top:8px;height:50px}.UPIlogo{padding-top:8px;height:36px}#EPIC,#OID1,#PID,#UID,#UPIID1,#UPIID2{align-self:self-start;font-size:24px;font-weight:600}.upperregion{height:220px;width:314px;display:flex;align-content:center;justify-content:space-between;padding-right:16px;padding-left:16px}#copy,#copy2,#copy3,#copy4,#copy5,#copy6{align-self:self-start;padding-left:8px;padding-top:24px;height:24px;width:24px}#lnk,#lnk2,#lnk3,#lnk4,#lnk5,#lnk6{align-self:self-start;padding-left:8px;padding-top:24px;height:24px;width:24px}.EPIC,.OTHER,.PID,.UID,.UPIID1,.UPIID2{display:flex;flex-direction:row;align-items:center}input{opacity:0;pointer-events:none}#qrimg,#qrimg2,#qrimg3,#qrimg4,#qrimg5,#qrimg6{margin-top:-150px;width:300px;padding-bottom:12px}#Aadhaarpopup>img{width:400px;height:400px}.background1{position:absolute;top:0;left:0;background-color:rgba(255,255,255,.5);backdrop-filter:blur(10px);width:100vw;height:100vh;z-index:-5}#whitebg{position:absolute;top:0;left:0;background-color:#fff;width:100vw;height:100vh;z-index:1000}.OtherID,.UPI1,.UPI2{display:flex;flex-direction:row;align-items:center}#OID1,#UPIID1,#UPIID2{width:130px;overflow:hidden;text-overflow:ellipsis}#upilogo .handle{width:100px;padding-top:16px}.handle{cursor:move;cursor:grab}#OID1{width:auto}.background1 img{position:fixed;left:50%;transform:translateX(-50%);bottom:50px;width:50px;display:none}#empty{font-size:24px;font-weight:600;text-decoration-line:underline;color:#818181;position:fixed;top:50vh;left:50vw;transform:translate(-50%,-50%);display:none}</style>
 </head>
 <body>
-    <h1>QR Cards</h1>
-    <div class="stack">
-    <!-- <div data-item="A"><a target="_self" href="https://drive.google.com/file/d/1TSOWcz425JAxlgCJERiBUUlgMqtFMlm-/view?usp=share_link"><img Class="Card" src="Aadhaar Card.png"></a></div>
-    <div data-item="B"><a href="https://drive.google.com/file/d/1TUqFV7OX0rOZKnbO0H1uAqATj-ah-x5U/view?usp=share_link"><img Class="Card" src="Pan Card.png"></a></div>
-    <div data-item="c"><a href="https://drive.google.com/file/d/1aPytEgenLxkTkdlTpLCZlendnAqY65dF/view?usp=share_link"><img Class="Card" src="Election Card.png"></a></div>
-    <div><img Class="Card" src="UPI Card 1.png"></div>
-    <div><img Class="Card" src="UPI Card 2.png"></div> -->
-    <div Class="AadhaarCard">
-        <div class="upperregion">
-            <div class="UID">
-                <p id="UID"></p>
-                <img id="copy" src="copy.svg">
-                <img id="lnk" src="link.svg">
-            </div>
-            <img class="handle" class="Aadhaar" src="Aadhar-Color.svg">
-        </div>
-        <div id="imgBox">
-            <img src="" id="qrimg">
-        </div>
-    </div>
-    <div class="PanCard">
-        <div class="upperregion">
-            <div class="PID">
-                <p id="PID"></p>
-                <img id="copy2" src="copy.svg">
-                <img id="lnk2" src="link.svg">
-            </div>
-            <img class="handle" class="PAN" src="Income-Tax-Department-Color.svg">
-        </div>
-        <div id="imgBox2">
-            <img src="" id="qrimg2">
-        </div>
-    </div>
-    <div class="ElectionCard">
-        <div class="upperregion">
-            <div class="EPIC">
-                <p id="EPIC"></p>
-                <img id="copy3" src="copy.svg">
-                <img id="lnk3" src="link.svg">
-            </div>
-            <img class="handle" class="Election" src="Electionlogo.svg">
-        </div>
-        <div id="imgBox3">
-            <img src="" id="qrimg3">
-        </div>
-    </div>
-    <div class="UPI1Card">
-        <div id="upilogo" class="upperregion">
-            <div class="UPI1">
-                <p id="UPIID1"></p>
-                <img id="copy4" src="copy.svg">
-                <img id="lnk4" src="link.svg">
-            </div>
-            <img class="handle" class="UPIlogo" src="UPI-Color.svg">
-        </div>
-        <div id="imgBox4">
-            <img src="" id="qrimg4">
-        </div>
-    </div>
-    <div class="UPI2Card">
-        <div id="upilogo" class="upperregion">
-            <div class="UPI2">
-                <p id="UPIID2"></p>
-                <img id="copy5" src="copy.svg">
-                <img id="lnk5" src="link.svg">
-            </div>
-            <img class="handle" class="UPIlogo" src="UPI-Color.svg">
-        </div>
-        <div id="imgBox5">
-            <img src="" id="qrimg5">
-        </div>
-    </div>
-    <div class="OtherCard1">
-        <div id="Otherlogo" class="upperregion">
-            <div class="OtherID">
-                <p id="OID1"></p>
-                <img id="copy6" src="copy.svg">
-                <img id="lnk6" src="link.svg">
-            </div>
-            <img class="handle" class="Otherlogo" src="">
-        </div>
-        <div id="imgBox6">
-            <img src="" id="qrimg6">
-        </div>
-    </div>
-    </div>
-    <a class="horcen" href="add.html"><div class="addbuttton"><img class="add" src="add-symbol-svgrepo-com.svg" alt=""></div></a>
-    <a href="add.html"><p id="empty">Add Cards</p></a>
-    <div class="background1"><img id="deletecard" src="deleteicon.svg"></div>
-    <div id="whitebg"></div>
-    <!-- <div class="popup"><img Class="Card" src="Aadhaar Card.png"></div> -->
+<h1>QR Cards</h1>
+<div class=stack>
+<div Class=AadhaarCard>
+<div class=upperregion>
+<div class=UID>
+<p alt="UID" id=UID></p>
+<img alt="Copy UID" id=copy src=copy.svg>
+<img alt="Open Link" id=lnk src=link.svg>
+</div>
+<img alt="Adhaar logo" class=handle class=Aadhaar src=Aadhar-Color.svg>
+</div>
+<div id=imgBox>
+<img alt="Adhaar QR" src="" id=qrimg>
+</div>
+</div>
+<div class=PanCard>
+<div class=upperregion>
+<div class=PID>
+<p alt="Pan ID"id=PID></p>
+<img alt="Copy Pan ID"id=copy2 src=copy.svg>
+<img alt="Open Link" id=lnk2 src=link.svg>
+</div>
+<img alt="PAN logo" class=handle class=PAN src=Income-Tax-Department-Color.svg>
+</div>
+<div id=imgBox2>
+<img alt="Pan QR" src="" id=qrimg2>
+</div>
+</div>
+<div class=ElectionCard>
+<div class=upperregion>
+<div class=EPIC>
+<p alt="EPIC" id=EPIC></p>
+<img alt="Copy EPIC" id=copy3 src=copy.svg>
+<img alt="Open Link" id=lnk3 src=link.svg>
+</div>
+<img alt="Election logo"class=handle class=Election src=Electionlogo.svg>
+</div>
+<div id=imgBox3>
+<img alt="Election QR" src="" id=qrimg3>
+</div>
+</div>
+<div class=UPI1Card>
+<div id=upilogo class=upperregion>
+<div class=UPI1>
+<p alt="UPI ID 1" id=UPIID1></p>
+<img alt="Copy UPI ID 1" id=copy4 src=copy.svg>
+<img alt="Open Link" id=lnk4 src=link.svg>
+</div>
+<img alt="UPI logo" class=handle class=UPIlogo src=UPI-Color.svg>
+</div>
+<div id=imgBox4>
+<img alt="UPI 1 QR"src="" id=qrimg4>
+</div>
+</div>
+<div class=UPI2Card>
+<div id=upilogo class=upperregion>
+<div class=UPI2>
+<p alt="UPI ID 2" id=UPIID2></p>
+<img alt="Copy UPI ID 2" id=copy5 src=copy.svg>
+<img alt="Open Link" id=lnk5 src=link.svg>
+</div>
+<img alt="UPI logo" class=handle class=UPIlogo src=UPI-Color.svg>
+</div>
+<div id=imgBox5>
+<img alt="UPI 2 QR" src="" id=qrimg5>
+</div>
+</div>
+<div class=OtherCard1>
+<div id=Otherlogo class=upperregion>
+<div class=OtherID>
+<p id=OID1></p>
+<img id=copy6 src=copy.svg>
+<img id=lnk6 src=link.svg>
+</div>
+<img class=handle class=Otherlogo src="">
+</div>
+<div id=imgBox6>
+<img src="" id=qrimg6>
+</div>
+</div>
+</div>
+<a class=horcen href=add.html><div class=addbuttton><img class=add src=add-symbol-svgrepo-com.svg alt=""></div></a>
+<a href=add.html><p id=empty>Add Cards</p></a>
+<div class=background1><img id=deletecard src=deleteicon.svg></div>
+<div id=whitebg></div>
 </body>
-<script>
-window.onload = (event) => {
-    console.log("page is fully loaded");
-    let Aadharimg;
-    let acard_num = localStorage.getItem("acardnumber");
-    let apdf_lnk = localStorage.getItem("apdflink");
-    let aqr_dt = localStorage.getItem("aqrdata");
-    let pcard_num = localStorage.getItem("pcardnumber");
-    let ppdf_lnk = localStorage.getItem("ppdflink");
-    let pqr_dt = localStorage.getItem("pqrdata");
-    let ecard_num = localStorage.getItem("ecardnumber");
-    let epdf_lnk = localStorage.getItem("epdflink");
-    let eqr_dt = localStorage.getItem("eqrdata");
-    let u1card_num = localStorage.getItem("u1cardnumber");
-    let u1pdf_lnk = localStorage.getItem("u1pdflink");
-    let u1qr_dt = localStorage.getItem("u1qrdata");
-    let u2card_num = localStorage.getItem("u2cardnumber");
-    let u2pdf_lnk = localStorage.getItem("u2pdflink");
-    let u2qr_dt = localStorage.getItem("u2qrdata");
-    let o1card_num = localStorage.getItem("ocardnumber");
-    let o1pdf_lnk = localStorage.getItem("opdflink");
-    let o1qr_dt = localStorage.getItem("oqrdata");
-    let o1col = localStorage.getItem("ocolor");
-    function openform() {  
-    }
-    document.getElementById("UID").innerHTML = acard_num;
-    imgBox = document.getElementById("imgBox");
-    qrimg = document.getElementById("qrimg");
-    qrimg.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + aqr_dt + "&size=800x800";
-    $('#lnk').click(function(){
-        window.open(apdf_lnk);
-    });
-    $('#copy').click(function(){
-        var dummy = $('<input>').val(acard_num).appendTo('body').select();
-        document.execCommand('copy');
-        alert('text copied')
-        console.log("text copied")
-    });
-    let a = 1
-    $(document).on('click','.AadhaarCard', ()=>{
-        $('.AadhaarCard').css('z-index', '1000');
-        $('.AadhaarCard').css('position', 'absolute');
-        $('.AadhaarCard').css('top', '50%');
-        $('.AadhaarCard').css('transform', 'translateY(-50%)');
-        $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden');
-        $('#deletecard').show()
-        $('#deletecard').click(function(){
-            console.log('delete clicked')
-            localStorage.removeItem("acardnumber");
-            localStorage.removeItem("apdflink");
-            localStorage.removeItem("aqrdata");
-            window.history.back();
-            location.reload();
-        })
-        $(document).on('click','.background1',()=>{
-            $('.background1').css('z-index', '-50');
-            $('.AadhaarCard').css('position', "");
-            $('.AadhaarCard').css('top', "");
-            $('.AadhaarCard').css('transform', "");
-            $('.AadhaarCard').css('z-index', "");
-            $('body').css('overflow-y',"")
-        });
-    });
-    document.getElementById("PID").innerHTML = pcard_num;
-    imgBox = document.getElementById("imgBox2");
-    qrimg = document.getElementById("qrimg2");
-    qrimg.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + pqr_dt + "&size=800x800";
-    $('#lnk2').click(function(){
-        window.open(ppdf_lnk);
-    });
-    $('#copy2').click(function(){
-        var dummy = $('<input>').val(pcard_num).appendTo('body').select();
-        document.execCommand('copy');
-        alert('text copied')
-    });
-    $('.PanCard').click(function(){
-        $('.PanCard').css('z-index', '1000');
-        $('.PanCard').css('position', 'absolute');
-        $('.PanCard').css('top', '50%');
-        $('.PanCard').css('transform', 'translateY(-50%)');
-        $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden');
-        $('#deletecard').show()
-        $('#deletecard').click(function(){
-            localStorage.removeItem("pcardnumber");
-            localStorage.removeItem("ppdflink");
-            localStorage.removeItem("pqrdata");
-            window.history.back();
-            location.reload();
-        })
-        $('.background1').click(function(){
-            $('.background1').css('z-index', '-50');
-            $('.PanCard').css('position', "");
-            $('.PanCard').css('top', "");
-            $('.PanCard').css('transform', "");
-            $('.PanCard').css('z-index', "");
-            $('body').css('overflow-y',"")
-        });
-    });
-    document.getElementById("EPIC").innerHTML = ecard_num;
-    imgBox = document.getElementById("imgBox3");
-    qrimg = document.getElementById("qrimg3");
-    qrimg.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + eqr_dt + "&size=800x800";
-    $('#lnk3').click(function(){
-        window.open(epdf_lnk);
-    });
-    $('#copy3').click(function(){
-        var dummy = $('<input>').val(ecard_num).appendTo('body').select();
-        document.execCommand('copy');
-        alert('text copied')
-    });
-    $('.ElectionCard').click(function(){
-        $('.ElectionCard').css('z-index', '1000');
-        $('.ElectionCard').css('position', 'absolute');
-        $('.ElectionCard').css('top', '50%');
-        $('.ElectionCard').css('transform', 'translateY(-50%)');
-        $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden');
-        $('#deletecard').show()
-        $('#deletecard').click(function(){
-            localStorage.removeItem("ecardnumber");
-            localStorage.removeItem("epdflink");
-            localStorage.removeItem("eqrdata");
-            window.history.back();
-            location.reload();
-        })
-        $('.background1').click(function(){
-            $('.background1').css('z-index', '-50');
-            $('.ElectionCard').css('position', "");
-            $('.ElectionCard').css('top', "");
-            $('.ElectionCard').css('transform', "");
-            $('.ElectionCard').css('z-index', "");
-            $('body').css('overflow-y',"")
-        });
-    });
-    document.getElementById("UPIID1").innerHTML = u1card_num;
-    imgBox = document.getElementById("imgBox4");
-    qrimg = document.getElementById("qrimg4");
-    qrimg.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + u1qr_dt + "&size=800x800";
-    $('#lnk4').click(function(){
-        window.open(u1pdf_lnk);
-    });
-    $('#copy4').click(function(){
-        var dummy = $('<input>').val(u1card_num).appendTo('body').select();
-        document.execCommand('copy');
-        alert('text copied')
-    });
-    $('.UPI1Card').click(function(){
-        $('.UPI1Card').css('z-index', '1000');
-        $('.UPI1Card').css('position', 'absolute');
-        $('.UPI1Card').css('top', '50%');
-        $('.UPI1Card').css('transform', 'translateY(-50%)');
-        $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden');
-        $('#deletecard').show()
-        $('#deletecard').click(function(){
-            localStorage.removeItem("u1cardnumber");
-            localStorage.removeItem("u1pdflink");
-            localStorage.removeItem("u1qrdata");
-            window.history.back();
-            location.reload();
-        })
-        $('.background1').click(function(){
-            $('.background1').css('z-index', '-50');
-            $('.UPI1Card').css('position', "");
-            $('.UPI1Card').css('top', "");
-            $('.UPI1Card').css('transform', "");
-            $('.UPI1Card').css('z-index', "");
-            $('body').css('overflow-y',"")
-        });
-    });
-    document.getElementById("UPIID2").innerHTML = u2card_num;
-    imgBox = document.getElementById("imgBox5");
-    qrimg = document.getElementById("qrimg5");
-    qrimg.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + u2qr_dt + "&size=800x800";
-    $('#lnk5').click(function(){
-        window.open(u2pdf_lnk);
-    });
-    $('#copy5').click(function(){
-        var dummy = $('<input>').val(u2card_num).appendTo('body').select();
-        document.execCommand('copy');
-        alert('text copied')
-    });
-    $('.UPI2Card').click(function(){
-        $('.UPI2Card').css('z-index', '1000');
-        $('.UPI2Card').css('position', 'absolute');
-        $('.UPI2Card').css('top', '50%');
-        $('.UPI2Card').css('transform', 'translateY(-50%)');
-        $('.background1').css('z-index', '8');
-        $('body').css('overflow-y','hidden');
-        $('#deletecard').show()
-        $('#deletecard').click(function(){
-            localStorage.removeItem("u2cardnumber");
-            localStorage.removeItem("u2pdflink");
-            localStorage.removeItem("u2qrdata");
-            window.history.back();
-            location.reload();
-        })
-        $('.background1').click(function(){
-            $('.background1').css('z-index', '-50');
-            $('.UPI2Card').css('position', "");
-            $('.UPI2Card').css('top', "");
-            $('.UPI2Card').css('transform', "");
-            $('.UPI2Card').css('z-index', "");
-            $('body').css('overflow-y',"")
-        });
-    });
-    // document.getElementById("OID1").innerHTML = o1card_num;
-    // imgBox = document.getElementById("imgBox6");
-    // qrimg = document.getElementById("qrimg6");
-    // qrimg.src = "https://api.qrserver.com/v1/create-qr-code/?data=" + o1qr_dt + "&size=800x800";
-    // $('#lnk6').click(function(){
-    //     window.open(o1pdf_lnk);
-    // });
-    if ($('#UID').is(':empty') && $('#PID').is(':empty') && $('#EPIC').is(':empty') && $('#UPIID1').is(':empty') && $('#UPIID2').is(':empty')){
-        $('#empty').show()
-        $('#whitebg').hide();
-    }
-    if ($('#UID').is(':empty')){
-        $('.AadhaarCard').hide();
-    } else {
-        $('.AadhaarCard').show();
-    }
-    if ($('#PID').is(':empty')){
-        $('.PanCard').hide();
-    } else {
-        $('.PanCard').show();
-    }
-    if ($('#EPIC').is(':empty')){
-        $('.ElectionCard').hide();
-    } else {
-        $('.ElectionCard').show();
-    }
-    if ($('#UPIID1').is(':empty')){
-        $('.UPI1Card').hide();
-    } else {
-        $('.UPI1Card').show();
-    }
-    if ($('#UPIID2').is(':empty')){
-        $('.UPI2Card').hide();
-    } else {
-        $('.UPI2Card').show();
-    }
-    if ($('#OID1').is(':empty')){
-        $('.OtherCard1').hide();
-    } else {
-        $('.OtherCard1').show();
-    }
-    const dragarea = document.querySelector(".stack");
-    new Sortable(dragarea,{
-        handle:'.handle',
-        animation:250
-    })
-    // if (card_num.length == 0){
-    //     $('.AadhaarCard').hide();
-    // } else {
-    //     $('.AadhaarCard').show();
-    // }
-    // console.log("script loaded");
-    // if (card_num2.length === '0' || card_num2 === "undefined"){
-    //     $('.PanCard').hide();
-    // } else {
-    //     $('.PanCard').show();
-    // }
-    // async function getFile() {
-    // // Open file picker and destructure the result the first handle
-    // const [fileHandle] = await window.showOpenFilePicker();
-    // const file = await fileHandle.getFile();
-    // return file;
-    // }
-    setTimeout(() => {
-        $('#whitebg').hide();
-    }, "2500");
-    
-};
-if ($('#UPIID2').is(':empty')){
-        $('.UPI2Card').hide();
-    } else {
-        $('.UPI2Card').show();
-    }
-        
-    // document.getElementsByClassName('AadhaarCard')[0]
-    //     .addEventListener('click', function (event) {
-    //         console.log("script loaded")
-    //     $('.AadhaarCard').css('z-index', '1000');
-    //     $('.AadhaarCard').css('position', 'absolute');
-    //     $('.AadhaarCard').css('top', '25vh');
-    //     $('.background1').css('z-index', '5');
-    //     $('.background1').on('click', function(){
-    //         $('.background1').css('z-index', '-5');
-    //         $('.AadhaarCard').css('position', "");
-    //         $('.AadhaarCard').css('top', "");
-    //         $('.AadhaarCard').css('z-index', '-4');
-    //     });
-    //     });
-</script>
+<script>window.addEventListener('load', () => {navigator.serviceWorker.register('../service-worker.js').then(_ => console.log('Registered service worker')).catch(e => console.log('Error registering: ',e));});$(document).ready((function(){$("#whitebg").hide()})),window.onload=e=>{setTimeout((()=>{}),"2500"),console.log("page is fully loaded");let o=localStorage.getItem("acardnumber"),a=localStorage.getItem("apdflink"),t=localStorage.getItem("aqrdata"),c=localStorage.getItem("pcardnumber"),d=localStorage.getItem("ppdflink"),r=localStorage.getItem("pqrdata"),n=localStorage.getItem("ecardnumber"),i=localStorage.getItem("epdflink"),l=localStorage.getItem("eqrdata"),s=localStorage.getItem("u1cardnumber"),m=localStorage.getItem("u1pdflink"),g=localStorage.getItem("u1qrdata"),u=localStorage.getItem("u2cardnumber"),I=localStorage.getItem("u2pdflink"),p=localStorage.getItem("u2qrdata");localStorage.getItem("ocardnumber"),localStorage.getItem("opdflink"),localStorage.getItem("oqrdata"),localStorage.getItem("ocolor");document.getElementById("UID").innerHTML=o,imgBox=document.getElementById("imgBox"),qrimg=document.getElementById("qrimg"),qrimg.src="https://api.qrserver.com/v1/create-qr-code/?data="+t+"&size=800x800",$("#lnk").click((function(){window.open(a)})),$("#copy").click((function(){$("<input>").val(o).appendTo("body").select();document.execCommand("copy"),alert("text copied"),console.log("text copied")}));$(document).on("click",".AadhaarCard",(()=>{$(".AadhaarCard").css("z-index","1000"),$(".AadhaarCard").css("position","absolute"),$(".AadhaarCard").css("top","50%"),$(".AadhaarCard").css("transform","translateY(-50%)"),$(".background1").css("z-index","8"),$("body").css("overflow-y","hidden"),$("#deletecard").show(),$("#deletecard").click((function(){1==confirm("Adhaar Card Will be Deleted")&&(localStorage.removeItem("acardnumber"),localStorage.removeItem("apdflink"),localStorage.removeItem("aqrdata"),window.history.back(),location.reload())})),$(document).on("click",".background1",(()=>{$(".background1").css("z-index","-50"),$(".AadhaarCard").css("position",""),$(".AadhaarCard").css("top",""),$(".AadhaarCard").css("transform",""),$(".AadhaarCard").css("z-index",""),$("#deletecard").hide(),$("body").css("overflow-y","")}))})),document.getElementById("PID").innerHTML=c,imgBox=document.getElementById("imgBox2"),qrimg=document.getElementById("qrimg2"),qrimg.src="https://api.qrserver.com/v1/create-qr-code/?data="+r+"&size=800x800",$("#lnk2").click((function(){window.open(d)})),$("#copy2").click((function(){$("<input>").val(c).appendTo("body").select();document.execCommand("copy"),alert("text copied")})),$(".PanCard").click((function(){$(".PanCard").css("z-index","1000"),$(".PanCard").css("position","absolute"),$(".PanCard").css("top","50%"),$(".PanCard").css("transform","translateY(-50%)"),$(".background1").css("z-index","8"),$("body").css("overflow-y","hidden"),$("#deletecard").show(),$("#deletecard").click((function(){1==confirm("Pan Card Will be Deleted")&&(localStorage.removeItem("pcardnumber"),localStorage.removeItem("ppdflink"),localStorage.removeItem("pqrdata"),window.history.back(),location.reload())})),$(".background1").click((function(){$(".background1").css("z-index","-50"),$(".PanCard").css("position",""),$(".PanCard").css("top",""),$(".PanCard").css("transform",""),$(".PanCard").css("z-index",""),$("#deletecard").hide(),$("body").css("overflow-y","")}))})),document.getElementById("EPIC").innerHTML=n,imgBox=document.getElementById("imgBox3"),qrimg=document.getElementById("qrimg3"),qrimg.src="https://api.qrserver.com/v1/create-qr-code/?data="+l+"&size=800x800",$("#lnk3").click((function(){window.open(i)})),$("#copy3").click((function(){$("<input>").val(n).appendTo("body").select();document.execCommand("copy"),alert("text copied")})),$(".ElectionCard").click((function(){$(".ElectionCard").css("z-index","1000"),$(".ElectionCard").css("position","absolute"),$(".ElectionCard").css("top","50%"),$(".ElectionCard").css("transform","translateY(-50%)"),$(".background1").css("z-index","8"),$("body").css("overflow-y","hidden"),$("#deletecard").show(),$("#deletecard").click((function(){1==confirm("Election Card Will be Deleted")&&(localStorage.removeItem("ecardnumber"),localStorage.removeItem("epdflink"),localStorage.removeItem("eqrdata"),window.history.back(),location.reload())})),$(".background1").click((function(){$(".background1").css("z-index","-50"),$(".ElectionCard").css("position",""),$(".ElectionCard").css("top",""),$(".ElectionCard").css("transform",""),$(".ElectionCard").css("z-index",""),$("#deletecard").hide(),$("body").css("overflow-y","")}))})),document.getElementById("UPIID1").innerHTML=s,imgBox=document.getElementById("imgBox4"),qrimg=document.getElementById("qrimg4"),qrimg.src="https://api.qrserver.com/v1/create-qr-code/?data="+g+"&size=800x800",$("#lnk4").click((function(){window.open(m)})),$("#copy4").click((function(){$("<input>").val(s).appendTo("body").select();document.execCommand("copy"),alert("text copied")})),$(".UPI1Card").click((function(){$(".UPI1Card").css("z-index","1000"),$(".UPI1Card").css("position","absolute"),$(".UPI1Card").css("top","50%"),$(".UPI1Card").css("transform","translateY(-50%)"),$(".background1").css("z-index","8"),$("body").css("overflow-y","hidden"),$("#deletecard").show(),$("#deletecard").click((function(){1==confirm("UPI Card 1 Will be Deleted")&&(localStorage.removeItem("u1cardnumber"),localStorage.removeItem("u1pdflink"),localStorage.removeItem("u1qrdata"),window.history.back(),location.reload())})),$(".background1").click((function(){$(".background1").css("z-index","-50"),$(".UPI1Card").css("position",""),$(".UPI1Card").css("top",""),$(".UPI1Card").css("transform",""),$(".UPI1Card").css("z-index",""),$("#deletecard").hide(),$("body").css("overflow-y","")}))})),document.getElementById("UPIID2").innerHTML=u,imgBox=document.getElementById("imgBox5"),qrimg=document.getElementById("qrimg5"),qrimg.src="https://api.qrserver.com/v1/create-qr-code/?data="+p+"&size=800x800",$("#lnk5").click((function(){window.open(I)})),$("#copy5").click((function(){$("<input>").val(u).appendTo("body").select();document.execCommand("copy"),alert("text copied")})),$(".UPI2Card").click((function(){$(".UPI2Card").css("z-index","1000"),$(".UPI2Card").css("position","absolute"),$(".UPI2Card").css("top","50%"),$(".UPI2Card").css("transform","translateY(-50%)"),$(".background1").css("z-index","8"),$("body").css("overflow-y","hidden"),$("#deletecard").show(),$("#deletecard").click((function(){1==confirm("UPI Card 1 Will be Deleted")&&(localStorage.removeItem("u2cardnumber"),localStorage.removeItem("u2pdflink"),localStorage.removeItem("u2qrdata"),window.history.back(),location.reload())})),$(".background1").click((function(){$(".background1").css("z-index","-50"),$(".UPI2Card").css("position",""),$(".UPI2Card").css("top",""),$(".UPI2Card").css("transform",""),$(".UPI2Card").css("z-index",""),$("#deletecard").hide(),$("body").css("overflow-y","")}))})),$("#UID").is(":empty")&&$("#PID").is(":empty")&&$("#EPIC").is(":empty")&&$("#UPIID1").is(":empty")&&$("#UPIID2").is(":empty")&&($("#empty").show(),$("#whitebg").hide()),$("#UID").is(":empty")?$(".AadhaarCard").hide():$(".AadhaarCard").show(),$("#PID").is(":empty")?$(".PanCard").hide():$(".PanCard").show(),$("#EPIC").is(":empty")?$(".ElectionCard").hide():$(".ElectionCard").show(),$("#UPIID1").is(":empty")?$(".UPI1Card").hide():$(".UPI1Card").show(),$("#UPIID2").is(":empty")?$(".UPI2Card").hide():$(".UPI2Card").show(),$("#OID1").is(":empty")?$(".OtherCard1").hide():$(".OtherCard1").show();const C=document.querySelector(".stack");new Sortable(C,{handle:".handle",animation:250})},$("#UPIID2").is(":empty")?$(".UPI2Card").hide():$(".UPI2Card").show()</script>
 </html>
