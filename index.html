@@ -565,6 +565,10 @@ input {
 <div id=whitebg></div>
 </body>
 <script>
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    deferredPrompt = e;
+});
 setTimeout(() => {
 }, "2500")
 window.addEventListener("load", () => {
