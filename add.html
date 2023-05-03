@@ -12,8 +12,26 @@
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
-<script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
     <style>
+        a:link {
+        color: #000;
+        background-color: transparent;
+        text-decoration: none;
+        }
+        a:visited {
+        color: #000;
+        background-color: transparent;
+        text-decoration: none;
+        }
+        h1 {
+        font-size: 32px;
+        margin: none;
+        padding: none;
+        margin-top: 36px;
+        background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        }
         body {
         margin: 30px;
         -webkit-tap-highlight-color: transparent;
@@ -76,7 +94,7 @@
             margin-bottom: 8px;
             font-size: 16px;
         }
-        #html5-qrcode-button-camera-stop,#html5-qrcode-button-camera-start, #html5-qrcode-button-camera-permission {
+        #html5-qrcode-button-camera-stop,#html5-qrcode-button-camera-start, #html5-qrcode-button-camera-permission, #html5-qrcode-button-file-selection {
             margin-top: 8px;
             margin-bottom: 4px;
             font-weight: 600;
@@ -134,6 +152,7 @@
     </style>
 </head>
 <body>
+    <a href="index.html"><h1>QR Cards</h1></a>
     <form class="stack" action="history.back()" onsubmit="myfunc(event);">
             <input placeholder="Choose Card Type" list="cards" id="ctype" required/></label>
             <datalist id="cards">
@@ -221,6 +240,27 @@
     //             console.log("other clicked") 
     //         }  
     // }, 1000);
+    let qrdtval;
+    let firstlet;
+    let upiidtxt;
+    // setInterval(() => {
+    // if ($('#qrdt').length > 0){
+    //     qrdtval = $('#qrdt').value;
+    //     console.log("its empty")
+    //     console.log(qrdtval)
+    // } else {
+    //     console.log("hiiii")
+    //     document.getElementById('cnum').value=qrdtval;
+    //     firstlet = qrdtval.charAt(0);
+    //     console.log(firstlet)
+    //     let upiidtxt = qrdtval.substring(14, qrdtval.indexOf('&'));
+    //     console.log(upiidtxt)
+    //     if (firstlet === "u") {
+    //     document.getElementById('cnum').value=upiidtxt;
+    //     }    
+    // }
+    // }, 500);
+
     function jQ_append(id_of_input, text){
     var input_id = '#'+id_of_input;
     $(input_id).val($(input_id).val() + text);
