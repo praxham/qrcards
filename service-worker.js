@@ -3,7 +3,8 @@ const STATIC_ASSETS = [
     '/index.html',
     '/add.html',
     '/manifest.json',
-    '/qrcardslogo.png'
+    '/qrcardslogo.png',
+    '/html5qrcodelib.js'
 ]
 async function preCache() {
     const cache = await caches.open(CACHE_NAME)
