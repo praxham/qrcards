@@ -13,8 +13,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel=stylesheet>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-<script src=jqueryproduction.js crossorigin=anonymous></script>
-<script src=Sortable.js></script>
+<script src="jqueryproduction.js" crossorigin=anonymous></script>
+<script src="jqueryimgcaching.js" crossorigin=anonymous></script>
+<script src="Sortable.js"></script>
 <style>
 .stack::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
@@ -38,8 +39,6 @@ h1 {
     margin-right: 30px;
     width: 100vw;
     padding: 8px;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
 }
 body {
     margin-left: 15px;
@@ -61,7 +60,7 @@ body {
     height: 80vh;
     overflow-y: scroll;
     width: 354px;
-    padding-top: 24px;
+    padding-top: 30px;
     scroll-margin-bottom: 100px;
 }
 .Card {
@@ -561,14 +560,11 @@ input {
 </div>
 </div>
 <a href=add.html><p id=empty>Add Cards</p></a>
+<button id="btnSave"></button>
 <div class=background1><img id=deletecard src=deleteicon.svg><img id=deletecard2 src=deleteicon.svg><img id=deletecard3 src=deleteicon.svg><img id=deletecard4 src=deleteicon.svg><img id=deletecard5 src=deleteicon.svg></div>
 <div id=whitebg></div>
 </body>
 <script>
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-    deferredPrompt = e;
-});
 setTimeout(() => {
 }, "2500")
 window.addEventListener("load", () => {
@@ -842,6 +838,11 @@ $(document).ready(function () {
         $('.ElectionCard').lazyload();
         $('.UPI1Card').lazyload();
         $('.UPI2Card').lazyload();
+        $('#qrimg').imageCaching();
+        $('#qrimg2').imageCaching();
+        $('#qrimg3').imageCaching();
+        $('#qrimg4').imageCaching();
+        $('#qrimg5').imageCaching();
     }),
     $("#UPIID2").is(":empty") ? $(".UPI2Card").hide() : $(".UPI2Card").show();
 </script>
