@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
     <style>
+        img[alt="Info icon"] {
+            display: none;
+        }
         a:link {
         color: #000;
         background-color: transparent;
@@ -94,6 +97,10 @@
             margin-bottom: 8px;
             font-size: 16px;
         }
+        #html5-qrcode-button-camera-permission {
+            margin-left: 16px;
+            margin-right: 16px;
+        }
         #html5-qrcode-button-camera-stop,#html5-qrcode-button-camera-start, #html5-qrcode-button-camera-permission, #html5-qrcode-button-file-selection {
             margin-top: 8px;
             margin-bottom: 4px;
@@ -165,7 +172,7 @@
         <input type="text" id="cnum" name="fname" placeholder="Enter Card Number" required>
         <input type="text" id="pdflnk" name="lname" placeholder="Add Link" required>
         <input type="text" id="qrdt" name="lname" placeholder="Add QR Code Data" required>
-        <div id="scanner"><img src="scan-svgrepo-com.svg"></div>
+        <div id="scanner"></div>
         <input type="text" id="color" placeholder="Choose Color for Card" data-coloris data-siid="si_input_3">
         <input type="submit" id="createcard" value="Create Card">
     </form>
