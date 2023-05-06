@@ -6,7 +6,8 @@ const STATIC_ASSETS = [
     'qrcardslogo.png',
     'html5qrcodelib.js',
     'jqueryimgcaching.js',
-    'Sortable.js'
+    'Sortable.js',
+    'toastify.js'
 ]
 async function preCache() {
     const cache = await caches.open(CACHE_NAME)
