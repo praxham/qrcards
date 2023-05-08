@@ -246,6 +246,23 @@
     //             console.log("other clicked") 
     //         }  
     // }, 1000);
+    let UPI
+    $("#ctype").click(
+    function() {
+        console.log("clicked...waiting...");
+
+        setInterval(
+            function() {
+                UPI = $('#ctype').val()
+                if (UPI === "UPI ID 1" || UPI === "UPI ID 2") {
+                 $('#pdflnk').val('https://gpay.app.goo.gl/')
+                 $('#createcard').css('position',"relative");
+                 $('#createcard').css('margin-top',"24px");
+                console.log("other clicked") 
+            }
+            },
+            1000);
+    });
     let qrdtval;
     let firstlet;
     let upiidtxt;
