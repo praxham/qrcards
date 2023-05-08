@@ -1,18 +1,13 @@
 {
     "name":"QR Cards",
     "short_name":"QRCards",
-    "start_url":"index.html",
+    "start_url":"https://prathampatankar.github.io/qrcards/",
     "display":"standalone",
     "background_color":"#FFFFFF",
     "theme_color":"white",
     "scope": ".",
     "description":"QR Cards Holder",
     "icons":[
-    {
-    "src":"qrcards logo.png",                     
-    "sizes":"192x192",
-    "type":"image/svg"
-    },
     {
     "src":"qrcardslogo.png",
     "sizes":"512x512",
