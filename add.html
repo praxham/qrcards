@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Cards - Add</title>
     <link rel="icon" type="image/x-icon" href="qrcardslogo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +14,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
     <style>
+        body::-webkit-scrollbar {
+        display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        body {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        }
         img[alt="Info icon"] {
             display: none;
         }
@@ -42,42 +50,63 @@
         backdrop-filter: blur(5px);
         }
         body {
-        margin: 30px;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: hidden;
+        margin: 16px;
         -webkit-tap-highlight-color: transparent;
         background-color: white;
+        }
+        input::-webkit-input-placeholder {
+            color: #505050;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        input:-ms-input-placeholder {
+            color: #505050;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        input:-moz-placeholder {
+            color: #505050;
+            font-size: 18px;
+            font-weight: 500;
         }
         input[type="text"],#ctype,#createcard {
             -webkit-appearance: none;
             appearance: none;
             text-decoration: none;
-            width: 92%;
-             border-radius: 17px;
+            width: 80vw;
+            border-radius: 17px;
             border: 0;
             background-color: #E8E8E8;
-            font-size:24px;
+            font-size: 18px;
+            font-weight: 500;
             color: #505050;
             padding: 0 16px 0 16px;
             height: 64px;
-            size: 18px;
+            size: 14px;
         }
         * input::placeholder {
             color: #505050;
             size: 18px;
         }
         .stack {
-            position: fixed;
-            bottom: 40px;
+            position: relative;
+            bottom: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 16px;
+            width: auto;
         }
         #createcard {
             border: 0;
             width: 100%;
             color: #505050;
-            background: #C3B091;
-            
+            background: #C3B091;  
         }
         #scanner img {
             position: inherit;
@@ -85,15 +114,13 @@
             height: 50px;
         }
         #scanner_dashboard_section {
-             border-radius: 17px;
+            border-radius: 17px;
             font-family: 'Noto Sans Devanagari', sans-serif;
-             
             font-size: 16px;
         }
         #html5-qrcode-select-camera {
-            padding: 8px 24px;
-             
-             border-radius: 17px;
+            padding: 8px 24px; 
+            border-radius: 17px;
         }
         #text {
             margin-bottom: 8px;
@@ -106,9 +133,8 @@
         #html5-qrcode-button-camera-stop,#html5-qrcode-button-camera-start, #html5-qrcode-button-camera-permission, #html5-qrcode-button-file-selection {
             margin-top: 8px;
             margin-bottom: 4px;
-             
             padding: 8px 24px;
-             border-radius: 17px;
+            border-radius: 17px;
             border: 0;
             outline: 0;
             color: #972253;
@@ -138,7 +164,7 @@
         }
         #color {
             align-self: center;
-             border-radius: 17px;
+            border-radius: 17px;
             background-image: none;
             transform: translateX(-10px);
             display: none;
@@ -154,7 +180,7 @@
         #file-upload-button button {
             outline: 0;
             border: 0;
-             border-radius: 17px;
+            border-radius: 17px;
             background: radial-gradient(119.64% 119.64% at 50% 50%, #FF7BB2 0%, #FFE3EF 100%);
             width: 100%;
         }
@@ -171,29 +197,38 @@
             right: 16px;
             bottom: 22px;
         }
+        .container {
+            width: calc(100vw-32px);
+        }
+        #createcard {
+            width: auto=;
+
+        }
     </style>
 </head>
 <body>
-    <form class="stack" action="history.back()" onsubmit="myfunc(event);">
-        <div id="scanner"></div>    
-        <div class="Html5Qrcode"></div>
-        <input placeholder="You’re Creating ..." list="cards" id="ctype" required/></label>
-            <datalist id="cards">
-                <option value="Aadhaar Card">
-                <option value="Pan Card">
-                <option value="Election Card">
-                <option value="UPI ID 1">
-                <option value="UPI ID 2">
-                <option value="School ID">
-                <option value="Work ID">
-              <!-- <option id="other" value="Other"> -->
-            </datalist>
-        <input type="text" id="cnum" name="fname" placeholder="Your ID Number 🔢 ..." required>
-        <input type="text" id="pdflnk" name="lname" placeholder="Link For Original Document 🔗 ..." required>
-        <input type="text" id="qrdt" name="lname" placeholder="QR Code Data 💾 ..." required>
-        <input type="submit" id="createcard" value="Create">
-        <input type="text" id="color" placeholder="Choose Color for Card" data-coloris data-siid="si_input_3">
-    </form>
+    <div class="container">
+        <form class="stack" action="history.back()" onsubmit="myfunc(event);">
+            <div id="scanner"></div>    
+            <div class="Html5Qrcode"></div>
+            <input placeholder="You’re Creating ..." list="cards" id="ctype" required/></label>
+                <datalist id="cards">
+                    <option value="Aadhaar Card">
+                    <option value="Pan Card">
+                    <option value="Election Card">
+                    <option value="UPI ID 1">
+                    <option value="UPI ID 2">
+                    <option value="School ID">
+                    <option value="Work ID">
+                  <!-- <option id="other" value="Other"> -->
+                </datalist>
+            <input type="text" id="cnum" name="fname" placeholder="Your ID Number 🔢 ..." required>
+            <input type="text" id="pdflnk" name="lname" placeholder="Link For Original Document 🔗 ..." required>
+            <input type="text" id="qrdt" name="lname" placeholder="QR Code Data 💾 ..." required>
+            <input type="submit" id="createcard" value="Create">
+            <input type="text" id="color" placeholder="Choose Color for Card" data-coloris data-siid="si_input_3">
+        </form>
+    </div>
 </body>
 <script>
     let ctype;
@@ -313,7 +348,7 @@
     document.getElementById('qrdt').value=decodedResult;
     };
     const config = { fps: 24, qrbox: { width: 400, height: 400 } };
-    html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
+    html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
     // const scanner = new Html5QrcodeScanner('scanner',{
     //         qrbox: {
     //             width:400,
